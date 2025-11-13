@@ -1,31 +1,38 @@
-import React from "react";
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import React, { useEffect } from "react";
 import '../assets/styles/Main.scss';
+interface MainProps {
+  mode: "light" | "dark";
+}
 
-function Main() {
+function Main({ mode }: MainProps) {
+    useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 0;  // sensitivity
+      const y = (e.clientY / window.innerHeight - 0.5) * 0;
+      document.documentElement.style.setProperty('--bg-x', `${x}%`);
+      document.documentElement.style.setProperty('--bg-y', `${y}%`);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   return (
-    <div className="container">
-      <div className="about-section">
-        <div className="image-wrapper">
-          <img src="https://my-aws-assets.s3.us-west-2.amazonaws.com/portfolio-img/avatar_circle.jpeg" alt="Avatar" />
-        </div>
-        <div className="content">
-          <div className="social_icons">
-            <a href="https://github.com/yujisatojr" target="_blank" rel="noreferrer"><GitHubIcon/></a>
-            <a href="https://www.linkedin.com/in/yujisato/" target="_blank" rel="noreferrer"><LinkedInIcon/></a>
-          </div>
-          <h1>Yuji Sato</h1>
-          <p>Full Stack Engineer</p>
+    <section id="landing" className="main-section">
+  {/* light bg */}
+  <div className={`bg-layer bg-light ${mode === "light" ? "bg-active" : ""}`} />
 
-          <div className="mobile_social_icons">
-            <a href="https://github.com/yujisatojr" target="_blank" rel="noreferrer"><GitHubIcon/></a>
-            <a href="https://www.linkedin.com/in/yujisato/" target="_blank" rel="noreferrer"><LinkedInIcon/></a>
-          </div>
-        </div>
-      </div>
+  {/* dark bg */}
+  <div className={`bg-layer bg-dark ${mode === "dark" ? "bg-active" : ""}`} />
+
+  <div className="overlay">
+    <div className="content">
+      <h1>Adi Jha</h1>
+      <p>Researcher</p>
     </div>
+  </div>
+</section>
+
   );
 }
 

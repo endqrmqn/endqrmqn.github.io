@@ -1,155 +1,78 @@
-.dark-mode .about-section {
-    background-color: rgba(0, 0, 0, 0.2);
-}
+.main-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 
-.about-section {
-    display: flex;
-    gap: 30px;
-    justify-content: flex-start;
-    align-items: center;
+  .bg-layer {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    padding: 0px 15%;
-    min-height: 700px;
-    background-image: url("../images/bg-dark.png");
+    height: 100%;
     background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-}
 
-.about-section .content {
-    text-align: left;
+    /* only opacity fades — background-position does NOT animate */
+    transition: opacity 0.6s ease;
+
+    z-index: 0;
+  }
+
+  /* dark — normal position */
+  .bg-dark {
+    background-image: url('../images/main-bg-dark.jpeg');
+    background-size: 300%;
+
+    background-position:
+      calc(50% + var(--bg-x, 0%))
+      calc(45% + var(--bg-y, 0%));     /* <--- dark stays normal */
+  }
+
+  /* light — ALWAYS shifted -12% vertically */
+  .bg-light {
+    background-size: 275%;
+
+    background-image: url('../images/main-bg-light.jpeg');
+    background-position:
+      calc(50% + var(--bg-x, 0%))
+      calc(30% + var(--bg-y, 0%));     /* 45% - 12% = 33% */
+  }
+
+  /* fade logic */
+  .bg-light,
+  .bg-dark {
+    opacity: 0;
+  }
+
+  .bg-active {
+    opacity: 1;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .content {
+    color: white;
+    text-align: center;
     z-index: 2;
 
-    .social_icons {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-        color: white;
-
-        svg {
-            font-size: 1.8em;
-        }
-    }
-
-    .mobile_social_icons {
-        display: none;
+    h1 {
+      font-size: 4rem;
+      font-weight: 600;
+      margin: 0;
     }
 
     p {
-        font-size: 1.5em;
-        margin-block-start: 0px;
-        margin-block-end: 0px;
+      margin-top: 0.5rem;
+      font-size: 1.3rem;
+      opacity: 0.85;
     }
-
-    h1 {
-        font-size: 5em;
-        margin-block-start: 0px;
-        margin-block-end: 0px;
-    }
-}
-
-.about-section .image-wrapper {
-    z-index: 2;
-    img {
-        width: 150px;
-        border-radius: 50%;
-    }
-}
-
-.about p {
-    text-align: center;
-    padding-top: 30%;
-    padding-bottom: 30%;
-}
-
-@media screen {
-    @media (max-width: 567px) {
-        .nav-left{
-            padding-top: 20px;
-            float:left;
-        }
-
-        .nav-left img {
-            height: 35px
-        }
-
-        .nav-right {
-            float:right;
-        }
-
-        .nav-right li {
-            padding: 10px 15px;
-            list-style:none;
-            font-size:13px;
-            color:white;
-            width: 10%;
-        }
-
-        .nav-right ul {
-            list-style-type: none;
-            margin: 0px;
-            padding: 0px;
-        }
-
-        body {
-            width: 100%;
-        }
-
-        .about {
-            padding-left: 5%;
-            padding-right: 5%;
-            font-size: 12px;
-        }
-    }
-
-    @media (max-width:768px) {
-        .about-section h1 {
-            font-size: 4em !important;
-            text-align: left;
-        }
-
-        .about-section p {
-            text-align: left;
-        }
-
-        .container {
-            display: initial;
-        }
-
-        .social_icons {
-            display: none !important;
-        }
-
-        .mobile_social_icons {
-            padding-top: 10px;
-            display: flex !important;
-            flex-direction: row;
-            gap: 10px;
-            color: white;
-    
-            svg {
-                font-size: 1.8em;
-            }
-        }
-
-        .about-section {
-            padding-top: 150px;
-            display: block;
-            padding-left: 0px;
-            padding-right: 0px;
-        }
-
-        .about-section .content {
-            width: 90%;
-            padding-left: 5%;
-            padding-right: 5%;
-            padding-bottom: 5%;
-        }
-
-        .about-section .image-wrapper {
-            padding-left: 5%;
-            width: 100%;
-        }
-    }
+  }
 }
