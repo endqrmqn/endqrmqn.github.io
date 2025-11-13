@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from "react";
-import {
-  Main,
-  Navigation,
-  Footer,
-} from "./components";
+import Main from "./components/Main";
+import Navigation from "./components/Navigation";
+import Footer from "./components/Footer";
+
 import FadeIn from './components/FadeIn';
 import './index.scss';
 
@@ -17,16 +16,23 @@ function App() {
             setMode('dark');
         }
     }
+    useEffect(() => {
+    // nothing here — no shifts needed
+    }, [mode]);
+
+
+
 
     useEffect(() => {
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
       }, []);
+    
 
     return (
     <div className={`main-container ${mode === "dark" ? 'dark-mode' : "light-mode"}`}>
         <Navigation parentToChild={{ mode }} modeChange={handleModeChange} />
         <FadeIn transitionDuration={700}>
-            <Main/>
+            <Main mode={mode}/>
         </FadeIn>
         <Footer />
     </div>

@@ -2,43 +2,77 @@
   position: relative;
   width: 100%;
   height: 100vh;
-  background: url('../images/main-bg.png') no-repeat center center;
-  background-size: 250%; // zoom in (100% = normal, >100% = zoomed)
-  background-position: calc(50% + var(--bg-x, 0%)) calc(45% + var(--bg-y, 0%));
-  transition: background-position 0.1s ease-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
-}
 
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
+  .bg-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
 
-.content {
-  color: white;
-  text-align: center;
-  z-index: 2;
+    /* only opacity fades — background-position does NOT animate */
+    transition: opacity 0.6s ease;
 
-  h1 {
-    font-size: 4rem;
-    font-weight: 600;
-    margin: 0;
+    z-index: 0;
   }
 
-  p {
-    margin-top: 0.5rem;
-    font-size: 1.3rem;
-    opacity: 0.85;
+  /* dark — normal position */
+  .bg-dark {
+    background-image: url('../images/main-bg-dark.jpeg');
+    background-size: 300%;
+
+    background-position:
+      calc(50% + var(--bg-x, 0%))
+      calc(45% + var(--bg-y, 0%));     /* <--- dark stays normal */
+  }
+
+  /* light — ALWAYS shifted -12% vertically */
+  .bg-light {
+    background-size: 275%;
+
+    background-image: url('../images/main-bg-light.jpeg');
+    background-position:
+      calc(50% + var(--bg-x, 0%))
+      calc(30% + var(--bg-y, 0%));     /* 45% - 12% = 33% */
+  }
+
+  /* fade logic */
+  .bg-light,
+  .bg-dark {
+    opacity: 0;
+  }
+
+  .bg-active {
+    opacity: 1;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .content {
+    color: white;
+    text-align: center;
+    z-index: 2;
+
+    h1 {
+      font-size: 4rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    p {
+      margin-top: 0.5rem;
+      font-size: 1.3rem;
+      opacity: 0.85;
+    }
   }
 }
