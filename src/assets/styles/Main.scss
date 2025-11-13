@@ -15,6 +15,8 @@
     transition: opacity 0.6s ease;
 
     z-index: 0;
+    filter: blur(8px);
+    transform: scale(1.03);
   }
 
   /* dark — normal position */
@@ -46,33 +48,87 @@
   .bg-active {
     opacity: 1;
   }
+  .profile {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.45);
+    pointer-events: auto;  // so hover works even though overlay disables clicks
+  }
+}
+
 
   .overlay {
     position: absolute;
     inset: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
     z-index: 1;
     pointer-events: none;
+    padding-right: 30rem;
+    padding-top: 15rem;
   }
 
-  .content {
-    color: white;
-    text-align: center;
+    .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;  // adjust spacing between img + text
     z-index: 2;
-
-    h1 {
-      font-size: 4rem;
-      font-weight: 600;
-      margin: 0;
+    color: white;
+    pointer-events: none;
     }
 
-    p {
-      margin-top: 0.5rem;
-      font-size: 1.3rem;
-      opacity: 0.85;
+    .text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    pointer-events: none;
     }
-  }
+
+    .text h1 {
+    font-size: 4rem;
+    font-weight: 600;
+    margin: 0;
+    }
+
+    .text p {
+    font-size: 1.4rem;
+    margin: 0.4rem 0 0;
+    opacity: 0.9;
+    }
+
+    .profile {
+    pointer-events: auto;
+    }
+
+    /* this is the circle */
+    .avatar {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.45);
+    border: 2px solid rgba(255, 255, 255, 0.25);
+
+    background-image: url('../images/1.png');
+    background-repeat: no-repeat;
+
+    /* "zoom" level */
+    background-size: 135%;  // 100% = no zoom, >100% = zoom in
+
+    /* crop / positioning */
+    background-position: center 20%;  // (x, y) — increase second value to show more torso
+    }
+
+
 }

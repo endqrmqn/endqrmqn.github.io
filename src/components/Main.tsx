@@ -27,9 +27,16 @@ function Main({ mode }: MainProps) {
 
   <div className="overlay">
     <div className="content">
-      <h1>Adi Jha</h1>
-      <p>Researcher</p>
+      <div className="profile">
+        <div className="avatar" />
+      </div>
+
+      <div className="text">
+        <h1>Adi Jha</h1>
+        <p>Researcher</p>
+      </div>
     </div>
+
   </div>
 </section>
 
